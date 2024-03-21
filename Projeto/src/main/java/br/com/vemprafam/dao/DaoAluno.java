@@ -3,7 +3,9 @@ package br.com.vemprafam.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,9 +41,46 @@ public class DaoAluno {
 		}
 	}
 
-	public List<Aluno> getLista() { return null; }
+	public List<Aluno> getLista() {
+		List<Aluno> result = new ArrayList<Aluno>();
+		try {
+			String sql="SELECT RA,NOME,DATANASCIMENTO,RENDA FROM ALUNOS";
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				int ra = rs.getInt(1);
+				String nome = rs.getString("NOME");
+				Date dataNascimento = rs.getDate(3);
+				double renda = rs.getDouble("RENDA");
+				Aluno aluno = new Aluno(ra, nome, dataNascimento, renda);
+				result.add(aluno);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
-	public Aluno buscarPeloRa( int ra ) { return null; }
+	public Aluno buscarPeloRa( int ra ) {
+		try {
+			String sql=
+			"SELECT RA,NOME,DATANASCIMENTO,RENDA FROM ALUNOS WHERE RA=?";
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, ra);
+			ResultSet rs = pstmt.executeQuery();
+			if( rs.next() ) {
+
+				String nome = rs.getString("NOME");
+				Date dataNascimento = rs.getDate(3);
+				double renda = rs.getDouble("RENDA");
+				Aluno aluno = new Aluno(ra, nome, dataNascimento, renda);
+				return aluno;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null; 
+	}
 
 	public void atualizar( Aluno aluno ) {
 		try {
@@ -73,7 +112,8 @@ public class DaoAluno {
 
 	public static void main(String[] args) {
 		DaoAluno  dao = new DaoAluno();
-		dao.excluir(new Aluno(1,"aaa",new Date(),1000));
+		//dao.excluir(new Aluno(1,"aaa",new Date(),1000));
+		System.out.println(dao.buscarPeloRa(222));
 	}
 }
 
