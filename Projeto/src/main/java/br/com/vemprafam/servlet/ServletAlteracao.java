@@ -19,14 +19,14 @@ import br.com.vemprafam.pojo.Aluno;
 /**
  * Servlet implementation class ServletCadastro
  */
-@WebServlet("/cadastrarAluno")
-public class ServletCadastro extends HttpServlet {
+@WebServlet("/alterarAluno")
+public class ServletAlteracao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletCadastro() {
+    public ServletAlteracao() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,7 +47,7 @@ public class ServletCadastro extends HttpServlet {
 		}
 		double renda = Double.parseDouble(request.getParameter("renda"));
 		DaoAluno dao = new DaoAluno();
-		dao.inserir(new Aluno(ra,nome,dataNascimento,renda));
+		dao.atualizar(new Aluno(ra,nome,dataNascimento,renda));
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html>\r\n"
 				+ "<head>\r\n"
@@ -55,7 +55,7 @@ public class ServletCadastro extends HttpServlet {
 				+ "<title>Resultado</title>\r\n"
 				+ "</head>\r\n"
 				+ "<body>\r\n"
-				+ "<p>Inserido</p>\r\n"
+				+ "<p>Atualizadd</p>\r\n"
 				+ "<a href='/Projeto'>voltar</a>\r\n"
 				+ "</body>\r\n"
 				+ "</html>");
