@@ -12,13 +12,22 @@
 <title>Formulário</title>
 </head>
 <body>
-<form action='cadastrarAluno'>
+<form action='Controller'>
 RA:<input type='text' name='ra'/><br/>
 nome:<input type='text' name='nome'/><br/>
 data de nascimento:<fam:campoData id='dataNascimento'/><br/>
 renda:<input type='text' name='renda'/><br/>
+<input type='hidden' name='op' value='Cadastrar'/>
 <input type='submit' value='enviar'/><br/>
 </form>
 <a href='/Projeto'>voltar</a>
 </body>
 </html>
+
+
+
+
+
+
+
+

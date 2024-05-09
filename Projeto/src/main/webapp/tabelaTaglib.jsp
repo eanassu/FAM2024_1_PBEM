@@ -16,8 +16,8 @@
 	<th>data de nascimento</th>
 	<th>renda</th>
 </tr>
-<jsp:useBean id="dao" class="br.com.vemprafam.dao.DaoAluno"></jsp:useBean>
-<c:forEach var="a" items='${dao.lista}' varStatus="id">
+
+<c:forEach var="a" items='${alunos}' varStatus="id">
 <tr>
 	<td>${a.ra}</td>
 	<td>${a.nome}</td>
